@@ -1,1 +1,1 @@
-# kafka-practice-twiiter
+# kafka-practice-twitter
