@@ -10,8 +10,12 @@ repositories {
 }
 
 dependencies {
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.32'
+    implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '3.0.0'
+    implementation group: 'org.twitter4j', name: 'twitter4j-stream', version: '4.0.6'
 }
 
 test {
