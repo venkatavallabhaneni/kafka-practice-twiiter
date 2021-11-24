@@ -20,18 +20,17 @@ public class TwitterProducer {
 
     public static void main(String[] args) throws TwitterException {
 
-        BlockingQueue<String> msgQueue = new LinkedBlockingQueue<String>(1000);
+        TwitterStream twitterStream = createClient();
 
-        Twitter client = createClient();
-        Query query = new Query("bitcoin");
-        QueryResult result = client.search(query);
-        List<Status> statuses = result.getTweets();
+        FilterQuery filterQuery = new FilterQuery();
+        filterQuery.track("bitcoin");
 
-        logger.info(";; "+ statuses.size());
+        twitterStream.addListener(new TwitterStatusListener());
+        twitterStream.filter(filterQuery);
 
     }
 
-    private static Twitter createClient() {
+    private static TwitterStream createClient() {
 
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
@@ -39,8 +38,8 @@ public class TwitterProducer {
                 .setOAuthConsumerSecret(CONSUMER_SECRET)
                 .setOAuthAccessToken(ACCESS_TOKEN)
                 .setOAuthAccessTokenSecret(ACCESS_SECRET);
-        TwitterFactory tf = new TwitterFactory(cb.build());
-        return tf.getInstance();
+        TwitterStream tf = new TwitterStreamFactory(cb.build()).getInstance();
+        return tf;
 
     }
 }
