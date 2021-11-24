@@ -3,12 +3,11 @@ package com.venkat.kafka.twitter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import twitter4j.*;
+import twitter4j.FilterQuery;
+import twitter4j.TwitterException;
+import twitter4j.TwitterStream;
+import twitter4j.TwitterStreamFactory;
 import twitter4j.conf.ConfigurationBuilder;
-
-import java.util.List;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 public class TwitterProducer {
 
@@ -32,14 +31,14 @@ public class TwitterProducer {
 
     private static TwitterStream createClient() {
 
-        ConfigurationBuilder cb = new ConfigurationBuilder();
-        cb.setDebugEnabled(true)
+        ConfigurationBuilder configBuilder = new ConfigurationBuilder();
+        configBuilder.setDebugEnabled(true)
                 .setOAuthConsumerKey(CONSUMER_KEY)
                 .setOAuthConsumerSecret(CONSUMER_SECRET)
                 .setOAuthAccessToken(ACCESS_TOKEN)
                 .setOAuthAccessTokenSecret(ACCESS_SECRET);
-        TwitterStream tf = new TwitterStreamFactory(cb.build()).getInstance();
-        return tf;
+        TwitterStream twitterStream = new TwitterStreamFactory(configBuilder.build()).getInstance();
+        return twitterStream;
 
     }
 }
