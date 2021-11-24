@@ -9,34 +9,34 @@ import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 import twitter4j.conf.ConfigurationBuilder;
 
-public class TwitterProducer {
+public class TwitterStreamReader {
 
-    private static Logger logger = LoggerFactory.getLogger(TwitterProducer.class);
-    private static final String CONSUMER_KEY = "dbQ06JPYDWGY0uVvixTux3DOQ";
-    private static final String CONSUMER_SECRET = "RMgxNJ6fiNB0wdYqyAIEO1Cw01WbFBWQD4abr6ZjonVevLKth9";
-    private static final String ACCESS_TOKEN = "1463387303762563073-bVFMQVqEVSNVNBHKZRo69nBFSXgAeh";
-    private static final String ACCESS_SECRET = "g5ly6VFF8UOBqMNuLoi1TGOBHDZPXUaQcrKr9guzkUIsB";
+    private static Logger logger = LoggerFactory.getLogger(TwitterStreamReader.class);
+    private static final String CONSUMER_KEY = "consumer.key";
+    private static final String CONSUMER_SECRET = "consumer.secret";
+    private static final String ACCESS_TOKEN = "access.token";
+    private static final String ACCESS_SECRET = "access.secret";
 
-    public static void main(String[] args) throws TwitterException {
+    public void readTweets(String[] term) throws TwitterException {
 
         TwitterStream twitterStream = createClient();
 
         FilterQuery filterQuery = new FilterQuery();
-        filterQuery.track("bitcoin");
+        filterQuery.track(term);
 
         twitterStream.addListener(new TwitterStatusListener());
         twitterStream.filter(filterQuery);
 
     }
 
-    private static TwitterStream createClient() {
+    private TwitterStream createClient() {
 
         ConfigurationBuilder configBuilder = new ConfigurationBuilder();
         configBuilder.setDebugEnabled(true)
-                .setOAuthConsumerKey(CONSUMER_KEY)
-                .setOAuthConsumerSecret(CONSUMER_SECRET)
-                .setOAuthAccessToken(ACCESS_TOKEN)
-                .setOAuthAccessTokenSecret(ACCESS_SECRET);
+                .setOAuthConsumerKey(AppPropertyReader.getValue(CONSUMER_KEY))
+                .setOAuthConsumerSecret(AppPropertyReader.getValue(CONSUMER_SECRET))
+                .setOAuthAccessToken(AppPropertyReader.getValue(ACCESS_TOKEN))
+                .setOAuthAccessTokenSecret(AppPropertyReader.getValue(ACCESS_SECRET));
         TwitterStream twitterStream = new TwitterStreamFactory(configBuilder.build()).getInstance();
         return twitterStream;
 

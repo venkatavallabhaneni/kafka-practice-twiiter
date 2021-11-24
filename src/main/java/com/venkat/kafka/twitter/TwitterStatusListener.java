@@ -10,10 +10,12 @@ import twitter4j.StatusListener;
 public class TwitterStatusListener implements StatusListener   {
 
     private static Logger logger = LoggerFactory.getLogger(TwitterStatusListener.class);
+
+    KafkaTwitterMessageProducer messageProducer = new KafkaTwitterMessageProducer();
     @Override
     public void onStatus(Status status) {
 
-        logger.info("@"+status.getUser().getScreenName()+"-"+status.getText());
+       messageProducer.sendMessage("@"+status.getUser().getScreenName()+" :: Message : "+status.getText());
     }
 
     @Override
