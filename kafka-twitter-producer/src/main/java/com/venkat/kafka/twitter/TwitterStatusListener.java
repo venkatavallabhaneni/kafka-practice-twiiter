@@ -1,5 +1,6 @@
 package com.venkat.kafka.twitter;
 
+import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import twitter4j.StallWarning;
@@ -7,15 +8,20 @@ import twitter4j.Status;
 import twitter4j.StatusDeletionNotice;
 import twitter4j.StatusListener;
 
-public class TwitterStatusListener implements StatusListener   {
+public class TwitterStatusListener implements StatusListener {
 
     private static Logger logger = LoggerFactory.getLogger(TwitterStatusListener.class);
 
     KafkaTwitterMessageProducer messageProducer = new KafkaTwitterMessageProducer();
+
+    private Gson gson = new Gson();
+
     @Override
     public void onStatus(Status status) {
 
-       messageProducer.sendMessage("@"+status.getUser().getScreenName()+" :: Message : "+status.getText());
+        Message message = new Message(status.getUser().getScreenName(), status.getText());
+        String jsonMessage = gson.toJson(message);
+        messageProducer.sendMessage(jsonMessage);
     }
 
     @Override
