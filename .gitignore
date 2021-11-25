@@ -3,3 +3,5 @@
 kafka-consumer-elastic/src/main/resources/application.properties.loc
 /kafka-twitter-producer/src/main/resources/application.properties.loc
 /build/
+/kafka-consumer-elastic/build/
+/kafka-twitter-producer/build/
