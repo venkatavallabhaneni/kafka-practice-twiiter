@@ -1,2 +1,4 @@
 rootProject.name = 'kafka-practice-twitter'
+include 'kafka-consumer-elastic'
+include 'kafka-twitter-producer'
 

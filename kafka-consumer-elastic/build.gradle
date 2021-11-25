@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+}
+
+group 'com.venkat'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.32'
+    implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '3.0.0'
+    implementation group: 'org.twitter4j', name: 'twitter4j-stream', version: '4.0.6'
+    implementation group: 'org.elasticsearch.client', name: 'elasticsearch-rest-high-level-client', version: '7.15.0'
+
+}
+
+test {
+    useJUnitPlatform()
+}
