@@ -8,7 +8,7 @@ public class TwitterMessagesProducerDemo {
 
         TwitterStreamReader twitterStreamReader = new TwitterStreamReader();
         try {
-            twitterStreamReader.readTweets(new String[]{"bitcoin"});
+            twitterStreamReader.readTweets(new String[]{"kafka","bitcoin","usa","andhra"});
         } catch (TwitterException e) {
             e.printStackTrace();
         }
