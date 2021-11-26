@@ -19,7 +19,7 @@ public class TwitterStatusListener implements StatusListener {
     @Override
     public void onStatus(Status status) {
 
-        Message message = new Message(status.getUser().getScreenName(), status.getText());
+        Message message = new Message(status.getUser().getScreenName(), status.getText(),status.getId(),Long.valueOf(status.getUser().getFollowersCount()));
         String jsonMessage = gson.toJson(message);
         messageProducer.sendMessage(jsonMessage);
     }

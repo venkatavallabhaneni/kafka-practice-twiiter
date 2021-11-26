@@ -14,7 +14,7 @@ public class KafkaTwitterMessageProducer {
     public static Logger logger = LoggerFactory.getLogger(KafkaTwitterMessageProducer.class.getName());
 
     public static final String BOOTSTRAP_SERVER = "localhost:9092";
-    public static final String TOPIC_NAME = "twitter-tweets-topic5";
+    public static final String TOPIC_NAME = "twitter-tweets-topic-new";
 
     public void sendMessage(String message) {
 
